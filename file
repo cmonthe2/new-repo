@@ -21,3 +21,470 @@ project-root/
 │   ├── team-a/
 │   └── team-b/
 └── tests/                    # Test scripts
+
+To have your developers create branches using Jira ticket numbers and track their commits on GitHub, you can follow these steps to ensure seamless integration:
+
+1. Define Branch Naming Convention
+Have a consistent naming convention for your branches that includes the Jira ticket number. A common format might be:
+
+php-template
+Copy code
+<JIRA-TICKET-ID>-<branch-name>
+For example:
+
+csharp
+Copy code
+ABC-123-add-new-feature
+XYZ-456-fix-bug
+This way, it's easy for Jira to associate commits with the correct ticket.
+
+2. Set Up Jira and GitHub Integration
+There are a few ways to link Jira and GitHub. You can use one of the following integrations:
+
+Jira Software GitHub Integration:
+
+Go to Jira Settings > Apps > Find new apps and search for the GitHub for Jira app.
+
+Once installed, follow the setup steps to link your GitHub repository with Jira.
+
+This integration allows you to view GitHub commits, pull requests, and branches directly within the Jira issue.
+
+Third-Party Tools (like Zapier or Automate.io): If you need more customization, you can use third-party services like Zapier or Automate.io to create custom workflows between GitHub and Jira.
+
+3. Encourage Developers to Reference Jira Tickets in Commit Messages
+Developers should reference the Jira ticket ID in their commit messages. For example:
+
+sql
+Copy code
+git commit -m "ABC-123: Fixed the bug in the login system"
+This is important because the integration will look for this reference (e.g., ABC-123) to associate the commit with the correct Jira issue.
+
+4. Automate Transition of Jira Issues Based on GitHub Activity
+Once you have the Jira-GitHub integration set up, you can configure Jira to automatically transition issues based on GitHub activity. For example, when a commit referencing a specific ticket is made or when a pull request is merged, Jira can automatically move the issue to a different status (e.g., from "In Progress" to "Code Review").
+
+5. Educate Developers
+Make sure your developers are aware of the process:
+
+Use the Jira ticket number when creating branches and committing code.
+
+Ensure the commit messages include the Jira ticket ID.
+
+This ensures that every change is traceable back to the corresponding Jira ticket.
+
+6. Monitor the Workflow
+Jira: Once the setup is complete, you can monitor all the commits and pull requests related to a specific Jira ticket directly from within Jira.
+
+GitHub: You can also see the Jira ticket ID mentioned in GitHub commit messages, making it easier to track which issue was worked on.
+
+By following these steps, your team will be able to easily track their commits on GitHub and ensure that Jira issues are properly updated with development progress.
+
+
+You said:
+How do i define branch naming convention 
+
+ChatGPT said:
+Defining a branch naming convention helps ensure consistency, organization, and traceability of your development work. Here's how you can define a branch naming convention:
+
+Key Principles for a Good Branch Naming Convention:
+Consistency: All developers should follow the same format for naming branches.
+
+Clarity: The branch name should clearly indicate the purpose of the branch.
+
+Automation Compatibility: The naming convention should support integrations (like Jira or GitHub) that can automatically track branches or commits based on their names.
+
+Common Branch Naming Formats:
+Here’s a simple approach using Jira ticket numbers and branch purpose:
+
+1. Basic Format with Jira Ticket Number
+Format: <JIRA-TICKET-ID>-<short-description>
+
+Example: ABC-123-add-login-button
+
+This format is easy to follow, and each branch is directly tied to a Jira issue. The ticket ID allows both developers and Jira to track which feature or bug the branch corresponds to.
+
+2. Branch Type Prefix
+You might also consider using a branch type prefix, which indicates the purpose of the branch. This makes it easier to identify whether the branch is for a feature, bug fix, hotfix, etc.
+
+Format: <type>/<JIRA-TICKET-ID>-<short-description>
+
+Example: feature/ABC-123-add-login-button
+bugfix/XYZ-456-fix-login-issue
+
+Common Branch Types:
+
+feature/: For new features
+
+bugfix/: For bug fixes
+
+hotfix/: For emergency fixes in production
+
+release/: For preparing a release
+
+chore/: For maintenance tasks, like refactoring
+
+experiment/: For experimental changes
+
+Example:
+
+pgsql
+Copy code
+feature/ABC-123-add-new-user-profile
+bugfix/DEF-456-fix-null-pointer-exception
+hotfix/XYZ-789-patch-crash-issue
+3. Branch Naming with Task/Context
+You can also define the purpose in a more detailed manner, especially for large projects, to include the task or context. This might involve more descriptive names.
+
+Format: <type>/<JIRA-TICKET-ID>-<task-context>
+
+Example: feature/ABC-123-implement-user-profile-page
+
+This format ensures that the branch clearly describes the Jira ticket and its task, improving the overall understanding of the work being done.
+
+Best Practices:
+Use Hyphens (-) to Separate Words: Use hyphens to separate words within the branch name for readability.
+
+Avoid Long Descriptions: Keep the descriptions short and relevant. Focus on the core change or feature.
+
+Use Lowercase: It's a good practice to use lowercase letters to avoid confusion (e.g., feature/abc-123-add-login).
+
+Avoid Special Characters: Stick to alphanumeric characters and hyphens. Special characters like &, @, and spaces should be avoided.
+
+Prefix Consistency: Be consistent with the prefixes (feature/, bugfix/, etc.) so that the purpose of the branch is immediately clear.
+
+Example Branch Names:
+Feature: feature/ABC-123-create-login-page
+
+Bug Fix: bugfix/DEF-456-fix-authentication-error
+
+Hotfix: hotfix/XYZ-789-crash-on-login
+
+Chore: chore/XYZ-789-update-dependencies
+
+Document the Branch Naming Convention
+Once you’ve decided on a naming convention, document it in your project’s contributing guidelines or internal documentation. This ensures all developers know how to name their branches.
+
+Automation:
+If you’re using integrations like Jira with GitHub, some tools can automatically enforce branch naming conventions or trigger actions based on the branch name (e.g., moving Jira tickets through workflows). You can configure Jira or GitHub actions to check that branch names adhere to your defined format.
+
+Summary:
+A good branch naming convention typically looks like:
+
+php-template
+Copy code
+<type>/<JIRA-TICKET-ID>-<short-description>
+By following this, you ensure that your development process is clear, organized, and easy to track, especially when integrated with Jira and GitHub.
+
+
+You said:
+So the branch naming convention is defined in github? 
+
+ChatGPT said:
+The branch naming convention itself is not something that is defined directly in GitHub—it's more of a development process that your team follows. However, GitHub can be used to enforce or automate these conventions with some configuration. Here's how it works:
+
+1. Branch Naming Convention is a Team-Defined Process
+The naming convention for branches (e.g., feature/ABC-123-add-login-button) is typically defined by the development team and enforced through practices, guidelines, or documentation. It's not something GitHub will automatically enforce for you, but you can communicate and ensure consistency through team collaboration.
+
+2. GitHub Features to Support the Convention:
+While GitHub itself does not enforce the naming convention, there are several features and tools that can help automate or support the convention:
+
+a. GitHub Actions (CI/CD):
+You can use GitHub Actions to automate workflows and enforce branch naming rules.
+
+Example: Enforcing Branch Name Format You can set up a GitHub Action to reject pull requests (PRs) that don't follow the proper naming convention. For instance, using a simple action that checks the branch name against a regular expression.
+
+Example of a GitHub Action (using a regex check):
+
+yaml
+Copy code
+name: Check Branch Name
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Check branch name
+        run: |
+          branch_name=$(echo ${{ github.head_ref }})
+          if [[ ! $branch_name =~ ^(feature|bugfix|hotfix)\/[A-Z]+-[0-9]+-.*$ ]]; then
+            echo "Error: Branch name does not follow convention."
+            exit 1
+          fi
+This GitHub Action checks the branch name before allowing a pull request to be merged into main. If the branch name does not match the pattern, the PR is blocked with an error message.
+
+b. GitHub Branch Protection Rules:
+While branch protection rules don't directly enforce naming conventions, they can help ensure that the right checks are in place before code is merged into main branches (like main or develop). For example, requiring that all pull requests meet certain requirements (e.g., passing checks, requiring reviews) helps maintain quality and consistency.
+
+c. GitHub Pull Request Templates:
+You can create a pull request template to remind developers to follow the branch naming conventions when opening a PR. Though it doesn't enforce branch names, it reminds developers about the rules.
+
+d. GitHub Commit Hooks (pre-push):
+You can use Git hooks to check the branch name before pushing changes to GitHub. This is done locally on each developer’s machine before the branch is pushed to the remote repository.
+
+For example, you can create a pre-push hook to ensure the branch name is formatted correctly before the push happens:
+
+bash
+Copy code
+#!/bin/sh
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+if [[ ! $BRANCH_NAME =~ ^(feature|bugfix|hotfix)\/[A-Z]+-[0-9]+-.*$ ]]; then
+  echo "Error: Branch name does not follow convention."
+  exit 1
+fi
+This requires the developer to install and use the hook script locally, which can be included as part of your team's onboarding process or setup scripts.
+
+3. Enforcing Branch Naming Convention through Jira (Optional Integration):
+If you are using Jira, and you have integrated Jira with GitHub (via the GitHub for Jira app or another integration), it becomes easier to link commits and branches to specific Jira tickets. By following the naming convention like <JIRA-TICKET-ID>-<description>, Jira can track which branches are related to specific issues or tickets.
+
+However, Jira doesn't directly control the branch name itself. It just benefits from the naming convention when the commit or branch includes the Jira ticket ID.
+
+Conclusion:
+The branch naming convention itself is defined by your team and is typically communicated through documentation, guidelines, or internal standards.
+
+GitHub doesn't enforce naming conventions by default, but you can automate checks using GitHub Actions or pre-push hooks.
+
+You can use Jira in conjunction with GitHub to better track branches, commits, and pull requests that are tied to Jira issues by including the ticket ID in your branch names.
+
+
+
+
+
+
+
+Commit Standard
+ Commit Type (required)
+ The <type> must be one and only one from the following values or semantic-release values:
+ Extra semantic-release <type>
+ Semantic release Major.Minor.Patch message to release mapping:
+ Jira Issue (required)
+ Description (required)
+ Examples
+ Commit Regex
+ Breakdown of Commit Regex:
+ type
+ optional scope
+ optional "!"
+ jira issue
+ semver for semantic-release bot
+ description
+ What if I want a different standard?
+Commit Standard
+
+
+
+
+Commit messages will adopt the
+Conventional Commits standards
+
+
+
+<type>[optional scope][optional "!"]: <jira issue | semver> <description>
+<BLANK LINE>
+[optional body]
+<BLANK LINE>
+[optional footer(s)]
+Required minimum
+
+
+<type>: <jira issue> <description>
+
+Commit Type (required)
+
+
+
+The <type> must be one and only one from the following values or semantic-release values:
+
+
+
+
+
+build
+chore
+ci
+docs
+feat
+fix
+perf
+refactor
+revert
+style
+test
+
+Extra semantic-release <type>
+
+
+
+
+
+breaking
+bug
+major
+minor
+patch
+Semantic release Major.Minor.Patch message to release mapping:
+
+
+
+Note on
+semantic-release workflow
+.   For the semantic-release workflow to execute correctly, merges should not be stacked up or merged faster than the pipeline can complete.  If this is not followed there will potentially be artifact versions published that are not tagged and that do not produce a change log.
+Integration tests will not run if your commit message does not increment version (chore, build, ci, style, or test).
+
+Commit Message Start
+
+
+Resulting Semantic Version Increment 
+
+
+chore, build, ci, refactor, style, test
+no increment
+fix, patch, docs, bug, perf, revert
+patch i.e. 1.0.0 → 1.0.1
+feat, minor
+minor i.e. 1.0.1 → 1.1.0
+breaking, major
+major i.e. 1.1.0 → 2.0.0
+ Why this is important:
+Overview of Semantic Versioning
+
+
+
+Jira Issue (required)
+
+
+
+The
+<jira issue>
+ must be a valid Jira issue number, which is made up of a <project key> followed by a hyphen (“-”) and finally by at least 1 digit (0-9).
+The
+<project key>
+ is restricted to be 2 to 9 uppercase letters and numbers.
+Examples of a valid
+<jira issue>:
+
+ EC-4032
+ DOPE-1
+ ABCDEFGHI-1
+The following examples will not be valid:
+ ec-4032 (“ec” must be capitalized)
+ DOPE1 (missing a hyphen)
+ ABCDEFGHIJ-1 (“ABCDEFGHIJ” has a length larger than 9)
+ A-1 (“A” has a length shorter than 2)
+ EC-! (“!” must be a digit (0-9)
+
+Description (required)
+
+
+
+ A description of the commit
+ All characters available
+ More info on the 
+ Conventional Commits
+  standards
+
+Examples
+
+
+
+
+
+feat: EC-6173 Added something related to this feature
+
+
+
+feat: DOPE-1 allow provided config object to extend other configs
+BREAKING CHANGE: extends key in config file is now used for extending other config files
+
+
+
+refactor: DOPE-23 refactor all config files
+Commit Regex
+
+
+
+
+
+^((breaking|bug|build|chore|ci|docs|feat|fix|major|minor|patch|perf|refactor|revert|style|test)(\(\w+( \w+)\))?(: (((\b[A-Z]{2,9}-\d+))|((0|[1-9]\d)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-])(?:\.(?:0|[1-9]\d|\d*[a-zA-Z-][0-9a-zA-Z-]))))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)))?)) (.\s*)))|(Merge (.\s*)*)|(Initial [Cc]ommit$)|^(Notes added by \'git notes add\')
+Breakdown of Commit Regex:
+
+
+
+type
+
+
+
+
+
+(breaking|bug|build|chore|ci|docs|feat|fix|major|minor|patch|perf|refactor|revert|style|test)
+
+optional scope
+
+
+
+
+
+(\(\w+( \w+)*\))?
+
+optional “!”
+
+
+
+using the optional
+!
+ with commit type (feat, chore, bug, etc.) is not supported by the
+semantic-release
+ tool/bot that is used to manage versions in GitLab pipelines
+jira issue
+
+
+
+
+
+(\b[A-Z0-9]{2,9}-\d+)
+
+semver for semantic-release bot
+
+
+
+
+
+((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-])(?:\.(?:0|[1-9]\d|\d*[a-zA-Z-][0-9a-zA-Z-]))))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?)
+Taken from the Semantic Versioning org website, which can be found
+here
+.
+
+description
+
+
+
+
+
+(.\s)*
+
+Why is
+(Merge (.\s)*)|(Initial [Cc]ommit$)
+ needed in the regex?
+ When merging master into the branch, ‘Merge ...’ is used
+ When initializing the repo, ‘Initial Commit’ or ‘Initial commit’ is used
+What if I want a different standard?
+
+
+
+GitLab provides the ability to override the instance level push rules on either a group or project level.
+Please refer to the
+Enabling push rules
+ section for Projects and the
+Group push rules
+ section for Groups/Subgroups in the GitLab documentation.
+Things to keep in mind:
+ If making changes to Group/Sub-group Push Rules, the changes only affect newly created Projects under the Group/Sub-group.
+ GitLab use Golang for regex.
+To validate your changes, this is a very helpful
+RegEx Validator
+.
