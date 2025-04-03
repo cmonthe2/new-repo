@@ -1,0 +1,23 @@
+Repository Structure
+To support multiple namespaces, structure your repository like this:
+project-root/
+├── modules/                  # Shared infrastructure module
+├── environments/             # Environment-specific configurations
+│   ├── dev/
+│   │   ├── main.tf           # Main configuration that references namespaces
+│   │   ├── team-a/           # Namespace-specific variables
+│   │   │   └── terraform.tfvars
+│   │   └── team-b/
+│   │       └── terraform.tfvars
+│   ├── qa/
+│   │   ├── main.tf
+│   │   ├── team-a/
+│   │   └── team-b/
+│   └── prod/
+│       ├── main.tf
+│       ├── team-a/
+│       └── team-b/
+├── namespaces/               # Namespace-specific modules (if needed)
+│   ├── team-a/
+│   └── team-b/
+└── tests/                    # Test scripts
